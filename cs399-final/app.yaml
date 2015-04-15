@@ -4,10 +4,26 @@ runtime: python27
 api_version: 1
 threadsafe: yes
 
-handlers:
+- url: /static/css
+  static_dir: static/css
+
+- url: /static/js
+  static_dir: static/js
+
+
+- url: /
+  static_files: templates/basesplash.html
+  upload: basesplash.html
+
+- url: /
+  static_files: templates/index.html
+  upload: index.html
+
+
 - url: /favicon\.ico
   static_files: favicon.ico
   upload: favicon\.ico
+
 
 - url: .*
   script: main.app
@@ -15,3 +31,5 @@ handlers:
 libraries:
 - name: webapp2
   version: "2.5.2"
+- name: jinja2
+  version: latest
