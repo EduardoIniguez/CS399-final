@@ -20,6 +20,10 @@ handlers:
 - url: /
   static_files: templates/index.html
   upload: index.html
+  
+- url: /
+  static_files: templates/createEval.html
+  upload: createEval.html
 
 
 - url: /favicon\.ico
