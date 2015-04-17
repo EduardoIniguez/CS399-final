@@ -16,6 +16,8 @@
 #
 
 import webapp2
+import cgi
+from google.appengine.ext import ndb
 
 from jinja2 import Environment, FileSystemLoader
 env = Environment(loader=FileSystemLoader('templates'))
@@ -29,11 +31,37 @@ class Home(webapp2.RequestHandler):
     def get(self):
         template = env.get_template('index.html') 
         self.response.write(template.render())
-        
+
+#model
+class PeerEvalMod(ndb.Expando):
+    name = ndb.StringProperty(required=True)
+    score = ndb.IntegerProperty(default=100,required=True)
+    workagain = ndb.BooleanProperty()
+    comment = ndb.StringProperty()
+    more = ndb.GenericProperty()
+
 class CreateEvaluation(webapp2.RequestHandler):
     def get(self):
-        template = env.get_template('createEval.html') 
-        self.response.write(template.render())
+        form ='<div class="form-group"><div class="col-sm-offset-2 col-sm-10"><div class="checkbox"><label class="control-label col-sm-2" for="name"><input type="checkbox" checked name="name"> Member Name?</label></div></div></div><div class="form-group"><div class="col-sm-offset-2 col-sm-10"><div class="checkbox"><label class="control-label col-sm-2" for="score"><input type="checkbox" checked name="workagain"> Score?</label></div></div></div><div class="form-group"><div class="col-sm-offset-2 col-sm-10"><div class="checkbox"><label class="control-label col-sm-2" for="workagain"><input type="checkbox" checked name="workagain"> Work with again?</label></div></div></div><br>'
+        temp_var = {'form':form }
+        template = env.get_template('createEval.html')
+        self.response.write(template.render(temp_var))
+
+    def post(self):
+        form = ""
+        if self.request.get('name'):
+            form+='<div class="form-group"><label class="control-label col-sm-2" for="id_name">Member Name:</label>' \
+                  '<div class="col-sm-10"><input type="text" class="form-control" id="id_name"></div></div>'
+        if self.request.get('score'):
+             form += '<div class="form-group"><label class="control-label col-sm-2" for="id_score">Score:</label>' \
+                     '<div class="col-sm-10"><input type="number" class="form-control" id="id_score" default=100 ></div></div>'
+        if self.request.get('workagain'):
+            form += '<div class="form-group"><div class="col-sm-offset-2 col-sm-10"><div class="checkbox">' \
+                    '<label class="control-label col-sm-2" for="id_workagain"><input type="checkbox" checked id="id_workagain">' \
+                    ' Work with again</label></div></div></div>'
+        temp_var = {'form':form }
+        template = env.get_template('createEval.html')
+        self.response.write(template.render(temp_var))
 
 class Contact(webapp2.RequestHandler):
     def get(self):
