@@ -42,7 +42,7 @@ class PeerEvalMod(ndb.Expando):
 
 class CreateEvaluation(webapp2.RequestHandler):
     def get(self):
-        form ='<div class="form-group"><div class="col-sm-offset-2 col-sm-10"><div class="checkbox"><label class="control-label col-sm-2" for="name"><input type="checkbox" checked name="name"> Member Name?</label></div></div></div><div class="form-group"><div class="col-sm-offset-2 col-sm-10"><div class="checkbox"><label class="control-label col-sm-2" for="score"><input type="checkbox" checked name="workagain"> Score?</label></div></div></div><div class="form-group"><div class="col-sm-offset-2 col-sm-10"><div class="checkbox"><label class="control-label col-sm-2" for="workagain"><input type="checkbox" checked name="workagain"> Work with again?</label></div></div></div><br>'
+        form ='<div class="form-group"><div class="col-sm-offset-2 col-sm-10"><div class="checkbox"><label class="control-label col-sm-2" for="name"><input type="checkbox" checked name="name"> Member Name?</label></div></div></div><div class="form-group"><div class="col-sm-offset-2 col-sm-10"><div class="checkbox"><label class="control-label col-sm-2" for="score"><input type="checkbox" checked name="score"> Score?</label></div></div></div><div class="form-group"><div class="col-sm-offset-2 col-sm-10"><div class="checkbox"><label class="control-label col-sm-2" for="workagain"><input type="checkbox" checked name="workagain"> Work with again?</label></div></div></div><br>'
         temp_var = {'form':form }
         template = env.get_template('createEval.html')
         self.response.write(template.render(temp_var))
