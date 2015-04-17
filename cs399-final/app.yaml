@@ -24,6 +24,14 @@ handlers:
 - url: /
   static_files: templates/createEval.html
   upload: createEval.html
+  
+- url: /
+  static_files: templates/contact.html
+  upload: contact.html
+  
+- url: /
+  static_files: templates/about.html
+  upload: about.html
 
 
 - url: /favicon\.ico

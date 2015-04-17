@@ -35,10 +35,22 @@ class CreateEvaluation(webapp2.RequestHandler):
         template = env.get_template('createEval.html') 
         self.response.write(template.render())
 
+class Contact(webapp2.RequestHandler):
+    def get(self):
+        template = env.get_template('contact.html') 
+        self.response.write(template.render())
+
+class About(webapp2.RequestHandler):
+    def get(self):
+        template = env.get_template('about.html') 
+        self.response.write(template.render())
 
 app = webapp2.WSGIApplication([
     ('/', SplashPage),
     ('/index.html', Home),
     ('/createEval.html', CreateEvaluation),
+    ('/contact.html', Contact),
+    ('/about.html', About),
+    
 
 ], debug=True)
