@@ -26,8 +26,9 @@ handlers:
   upload: message.html
   
 - url: /
-  static_files: templates/createEval.html
-  upload: createEval.html
+  script: createEval.app
+#  static_files: templates/createEval.html
+#  upload: createEval.html
   
 - url: /
   static_files: templates/contact.html
