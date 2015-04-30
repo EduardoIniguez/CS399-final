@@ -20,4 +20,4 @@ class PeerEvalMod(ndb.model):
     commentReq = ndb.BooleanProperty()
     quest = ndb.StringProperty()
     questReq = ndb.StringProperty()
-    type = ndb.StringProperty()
+    questType = ndb.StringProperty()

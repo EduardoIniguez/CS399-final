@@ -12,28 +12,55 @@ Create Evaluation Form
     <h4>Please select from preset questions or add your own</h4>
     <form id="dynamic" class="form" action="" method="post">
         {{ form }}
+
+{#    <input type="text" hidden="hidden" value="" name="quest"><input hidden="hidden" type="text" value="" name="questReq"><input hidden="hidden" type="text" name="questType">#}
     </form>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10"><br>
                 <input  onclick="addField();" type="button" value="Add Question?" class="btn">
-                <input form="dynamic" type="submit" class="btn">
+                <input onclick="setStr();" form="dynamic" type="submit" class="btn">
             </div>
         </div>
 {% endblock %}
 {% block JS %}
-    var cust_count = 1;
+    var cust_count = 0;
     function addField(){
         var newField = document.createElement('div');
 {#    alert("pee");#}
 {#        var str =#}
 {#        newField.innerHTML = #}
-        var one = "<div class='form-group' " + "id='custom_" + cust_count + "'><div class='col-sm-offset-2 col-sm-10'>";
-        var two = "<div class='checkbox'><label class='control-label col-sm-5'><input type='checkbox' checked name='custCheck'>Custom Question ";
-        var three = cust_count + "&nbsp;&nbsp;<input type='text' name='custom'></label><label class='control-label col-sm-1'><input type='checkbox' name='questReq'>required?</label><label class='control-label col-sm-2'>Type&nbsp;&nbsp;<select><option value='text'>Text</option><option value='tf'>T or F</option><option value='rate'>Rate</option></select></label></div></div></div>";
+        var one = "<div class='form-group name='custom'><div class='col-sm-offset-2 col-sm-10'>";
+        var two = "<div class='checkbox'><label class='control-label col-sm-5'><input type='checkbox' checked name='custInclude'>Custom Question ";
+        var three = (++cust_count) + "&nbsp;&nbsp;<input type='text' name='custText'></label><label class='control-label col-sm-1'><input type='checkbox' name='custReq'>required?</label><label class='control-label col-sm-2'>Type&nbsp;&nbsp;<select name='custType'><option value='text'>Text</option><option value='TF'>T or F</option><option value='rate'>Rate</option></select></label></div></div></div>";
         newField.innerHTML = one +two+three;
-        cust_count++;
+{#        cust_count++;#}
         document.getElementById('dynamic').appendChild(newField);
     }
+    function setStr(){
+        if(cust_count>0){
+            var i;
+            var q = "";
+            var r = "";
+            var t = "";
+            for(i=0;i<cust_count;i++){
+                if (document.getElementsByName("custInclude")[i].checked){
+                q =  q + document.getElementsByName("custText")[i].value;
+                r =  r + document.getElementsByName("custReq")[i].checked;
+                t =  t + document.getElementsByName("custType")[i].value;
 
+                q = q + ",";
+                r = r + ",";
+                t = t + ",";
+                }
+
+            document.getElementByName("quest")[0]. value = q;
+            document.getElementByName("questReq")[0]. value = r;
+            document.getElementByName("questType")[0]. value = t;
+
+            }
+
+
+        }
+    }
 
 {% endblock %}
