@@ -10,8 +10,14 @@ env = Environment(loader=FileSystemLoader('templates'))
 
 #model
 class PeerEvalMod(ndb.model):
-    name = ndb.StringProperty(required=True)
-    score = ndb.IntegerProperty(default=100,required=True)
-    workagain = ndb.BooleanProperty()
+    name = ndb.StringProperty()
+    nameReq = ndb.BooleanProperty()
+    score = ndb.IntegerProperty(default=100, min=0)
+    scoreReq = ndb.BooleanProperty()
+    workAgain = ndb.BooleanProperty()
+    workAgainReq = ndb.BooleanProperty()
     comment = ndb.StringProperty()
-    more = ndb.StringProperty
+    commentReq = ndb.BooleanProperty()
+    quest = ndb.StringProperty()
+    questReq = ndb.StringProperty()
+    type = ndb.StringProperty()

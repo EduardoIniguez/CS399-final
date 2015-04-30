@@ -9,12 +9,31 @@ Create Evaluation Form
 {% endblock %}
 
 {% block content %}
-    <form class="form" action="" method="post">
+    <h4>Please select from preset questions or add your own</h4>
+    <form id="dynamic" class="form" action="" method="post">
         {{ form }}
+    </form>
         <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-2">
-                <input type="submit" class="btn">
+            <div class="col-sm-offset-2 col-sm-10"><br>
+                <input  onclick="addField();" type="button" value="Add Question?" class="btn">
+                <input form="dynamic" type="submit" class="btn">
             </div>
         </div>
-    </form>
+{% endblock %}
+{% block JS %}
+    var cust_count = 1;
+    function addField(){
+        var newField = document.createElement('div');
+{#    alert("pee");#}
+{#        var str =#}
+{#        newField.innerHTML = #}
+        var one = "<div class='form-group' " + "id='custom_" + cust_count + "'><div class='col-sm-offset-2 col-sm-10'>";
+        var two = "<div class='checkbox'><label class='control-label col-sm-5'><input type='checkbox' checked name='custCheck'>Custom Question ";
+        var three = cust_count + "&nbsp;&nbsp;<input type='text' name='custom'></label><label class='control-label col-sm-1'><input type='checkbox' name='questReq'>required?</label><label class='control-label col-sm-2'>Type&nbsp;&nbsp;<select><option value='text'>Text</option><option value='tf'>T or F</option><option value='rate'>Rate</option></select></label></div></div></div>";
+        newField.innerHTML = one +two+three;
+        cust_count++;
+        document.getElementById('dynamic').appendChild(newField);
+    }
+
+
 {% endblock %}
