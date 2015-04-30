@@ -12,38 +12,11 @@ handlers:
 - url: /static/js
   static_dir: static/js
 
-
-- url: /
-  static_files: templates/basesplash.html
-  upload: basesplash.html
-
-- url: /
-  static_files: templates/index.html
-  upload: index.html
-  
-- url: /
-  static_files: templates/message.html
-  upload: message.html
-  
-- url: /
-  script: createEval.app
-#  static_files: templates/createEval.html
-#  upload: createEval.html
-  
-- url: /
-  static_files: templates/contact.html
-  upload: contact.html
-  
-- url: /
-  static_files: templates/about.html
-  upload: about.html
-
-
 - url: /favicon\.ico
   static_files: favicon.ico
   upload: favicon\.ico
 
-- url: .*
+- url: /.*
   script: main.app
 
 libraries:
