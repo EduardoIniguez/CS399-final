@@ -12,7 +12,6 @@ Create Evaluation Form
     <h4>Please select from preset questions or add your own</h4>
     <form id="dynamic" class="form" action="" method="post">
         {{ form }}
-
 {#    <input type="text" hidden="hidden" value="" name="quest"><input hidden="hidden" type="text" value="" name="questReq"><input hidden="hidden" type="text" name="questType">#}
     </form>
         <div class="form-group">
@@ -53,9 +52,9 @@ Create Evaluation Form
                 t = t + ",";
                 }
 
-            document.getElementByName("quest")[0]. value = q;
-            document.getElementByName("questReq")[0]. value = r;
-            document.getElementByName("questType")[0]. value = t;
+            document.getElementsByName("quest")[0].value = q;
+            document.getElementsByName("questReq")[0].value = r;
+            document.getElementsByName("questType")[0].value = t;
 
             }
 
