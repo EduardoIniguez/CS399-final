@@ -41,7 +41,7 @@ Create Evaluation Form
             var q = "";
             var r = "";
             var t = "";
-            for(i=0;i<cust_count;i++){
+            for(i=0;i < cust_count;i++){
                 if (document.getElementsByName("custInclude")[i].checked){
                 q =  q + document.getElementsByName("custText")[i].value;
                 r =  r + document.getElementsByName("custReq")[i].checked;
@@ -51,10 +51,11 @@ Create Evaluation Form
                 r = r + ",";
                 t = t + ",";
                 }
-
             document.getElementsByName("quest")[0].value = q;
+
             document.getElementsByName("questReq")[0].value = r;
             document.getElementsByName("questType")[0].value = t;
+{#                alert(r);#}
 
             }
 

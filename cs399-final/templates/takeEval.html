@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}
+Take Evaluation
+{% endblock title %}
+
+{% block pageHeader %}
+Peer Evaluation
+{% endblock %}
+{% block content %}
+    <h4>Please Fill in All Required Fields</h4>
+    <form id="dynamic" class="form" action="" method="post">
+{#<div class=""><label>test:</label><input type="checkbox" class="form-control" ></div>#}
+<input type="text" hidden="hidden" name="peer_count">
+<input type="text" hidden="hidden" name="field_count">
+        {{ form }}
+        {{ test }}
+{#    <input type="text" hidden="hidden" value="" name="quest"><input hidden="hidden" type="text" value="" name="questReq"><input hidden="hidden" type="text" name="questType">#}
+    </form>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10"><br>
+{#                <input  onclick="addField();" type="button" value="Add Peer" class="btn">#}
+                <input onclick="setStr();" form="dynamic" type="submit" class="btn">
+            </div>
+        </div>
+{% endblock %}
+{% block JS %}
+    var count = 1;
+    var cust_id = 1;
+    var cust_count = {{ count }};
+{#    alert(cust_count);#}
+{#    document.getElementsByName('cust_field_count')[0].value = cust_count;#}
+    function addField(){
+        var newField = document.createElement('div');
+        newField.innerHTML = '{{ form }}';
+        document.getElementById('dynamic').appendChild(newField);
+        var mark = "id_1";
+        if (document.getElementsByName('name')[0]){
+            var newName = "name"+count;
+            document.getElementsByName('name')[1].id = mark;
+            document.getElementById(mark).name = newName;
+            document.getElementsByName(newName).id = "";
+        }
+        if (document.getElementsByName('score')[0]){
+            var newName = "score"+count;
+            document.getElementsByName('score')[1].id = mark;
+            document.getElementById(mark).name = newName;
+            document.getElementsByName(newName).id = "";
+
+{#            alert("score");#}
+        }
+        if (document.getElementsByName('workAgain')[0]){
+            var newName = "workAgain"+count;
+            document.getElementsByName('workAgain')[1].id = mark;
+            document.getElementById(mark).name = newName;
+            alert(document.getElementById(mark).name);
+            document.getElementsByName(newName).id = "";
+{#            alert("workAgain");#}
+        }
+        if (document.getElementsByName('comments')[0]){
+            var newName = "comments"+count;
+            document.getElementsByName('comments')[1].id = mark;
+            document.getElementById(mark).name = newName;
+            document.getElementsByName(newName).id = "";
+{#            alert("comment");#}
+        }
+        if (document.getElementsByName('custom')[0]){
+            for(var i =cust_count; i<2*cust_count;i++){
+                var newName = "custom"+(cust_id++);
+                document.getElementsByName('custom')[i].id = mark;
+                document.getElementById(mark).name = newName;
+                document.getElementsByName(newName).id = "";
+            }
+{#        alert("custom");#}
+        }
+count++;
+    }
+
+
+    function setStr(){
+
+            document.getElementsByName("peer_count")[0].value = count;
+                document.getElementsByName("field_count")[0].value = cust_count;
+{#            document.getElementsByName("questReq")[0].value = r;#}
+{#            document.getElementsByName("questType")[0].value = t;#}
+
+{#            }#}
+
+
+{#        }#}
+    }
+
+{% endblock %}

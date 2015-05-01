@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}
+Success!!
+{% endblock title %}
+
+{% block pageHeader %}
+Thank You
+{% endblock %}
+
+{% block content %}
+    <h4>{{ message }}</h4>
+    <br>
+
+    <form id="dynamic" class="form" action="" method="post">
+    <h5>{{ form }}</h5>
+    </form>
+{#    {{ test }}#}
+{% endblock %}
