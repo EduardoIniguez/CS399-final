@@ -84,14 +84,14 @@ class TakeEvaluation(webapp2.RequestHandler):
         comments = "comments"
         # test +=workAgain
         if self.request.get(name):
-            submission.name = self.request.get(name)
+            submission.name = str(self.request.get(name))
             # test = self.request.get("name")
         if self.request.get(score):
-            submission.score = self.request.get(score)
+            submission.score = int(self.request.get(score))
         if not(self.request.get(workAgain)):
             submission.workAgain = False
         if self.request.get("comments"):
-            submission.comment= self.request.get(comments)
+            submission.comment= str(self.request.get(comments))
         custSTR = ''
         if x>0:
             for i in range(0,x):
