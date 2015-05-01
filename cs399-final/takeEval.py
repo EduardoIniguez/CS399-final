@@ -70,7 +70,10 @@ class TakeEvaluation(webapp2.RequestHandler):
     def post(self, id):
         form = ''
         x = self.request.get('field_count')
-        x = int(x)
+        try:
+            x = int(x)
+        except ValueError:
+            x=0
         test = ''
         # for i in range(0,x):
         submission = PeerEvalMod()
