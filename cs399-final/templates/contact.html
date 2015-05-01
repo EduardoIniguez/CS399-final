@@ -64,7 +64,7 @@ Contact / Feedback
                     }
             </style>
 
-            <form method ="post" class="form">
+            <form method ="post" class="form" onsubmit='return validateMyForm()'>
                 <p class="name">
                     <input type="text" name="name" id="name" />
                     <label for="name">Name</label>
@@ -81,13 +81,54 @@ Contact / Feedback
                 </p> 
                 
                 <p class="text">
-                    <textarea name="message"></textarea> 
+                    <textarea name="message" id="message"></textarea> 
                 </p> 
                 
                 <p class="submit"> 
                     <input type="submit" value="Send" /> 
                 </p>
             </form>
+            
+            <script type="text/javascript">
+            
+            function validateMyForm()
+            {
+                var valid = true;
+                var validationMessage = 'Please correct the following errors:\r\n';
+
+                if (document.getElementById('name').value.length == 0)
+                {
+                    validationMessage = validationMessage + '  - Name is missing\r\n';
+                    valid = false;
+                }
+        
+                if (document.getElementById('mail').value.length == 0)
+                {
+                    validationMessage = validationMessage + '  - Email is missing\r\n';
+                    valid = false;
+                }
+        
+                if (document.getElementById('subject').value.length == 0)
+                {
+                    validationMessage = validationMessage + '  - Subject is missing\r\n';
+                    valid = false;
+                }
+                
+                 if (document.getElementById('message').value.length == 0)
+                {
+                    validationMessage = validationMessage + '  - Message is missing\r\n';
+                    valid = false;
+                }
+                
+                if (valid == false)
+                {
+                    alert(validationMessage);
+                }
+                return valid;
+            }
+            
+            </script>
+
         </body>
 </html>
 {% endblock %}
