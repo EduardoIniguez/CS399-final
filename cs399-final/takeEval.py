@@ -13,6 +13,8 @@ class TakeEvaluation(webapp2.RequestHandler):
             formKey = ndb.Key(urlsafe=surveyID)
             formtemp = formKey.get()
             form = ''
+            count = ''
+            test = ''#len(formtemp.quest)
             if formtemp.name:
                 form +='<div class="form-group"><label>Member Name:</label><input type="text" name="name" class="form-control" '
                 if formtemp.nameReq:
@@ -33,34 +35,35 @@ class TakeEvaluation(webapp2.RequestHandler):
                 if formtemp.commentReq:
                     form += 'required '
                 form += '></div>'
-            questStr = formtemp.quest.split(",")
-            questReqStr = formtemp.questReq.split(",")
-            questTypeStr = formtemp.questType.split(",")
-            count = 0
-            for i in range(0,len(questStr)):
-                if questStr[i].replace(" ","")!="":
-                    count += 1
-                    form += '<div class="form-group"><label>' +questStr[i] + ':</label><input type='
-                    if questTypeStr[i]=="TF":
-                        form += '"checkbox" '
-                    elif questTypeStr[i]=="rate":
-                        form += '"number" placeholder="100"'
-                    else:
-                        form += '"text" '
-                    form += 'name="custom'
-                    form += str(i)
-                    form += '" class="form-control" '
-                    test = ''
-                    if questReqStr[i]=="true":
-                        form += 'required '
-                    form += '></div>'
+            if len(formtemp.quest)>0:
+                questStr = formtemp.quest.split(",")
+                questReqStr = formtemp.questReq.split(",")
+                questTypeStr = formtemp.questType.split(",")
+                count = 0
+                for i in range(0,len(questStr)):
+                    if questStr[i].replace(" ","")!="":
+                        count += 1
+                        form += '<div class="form-group"><label>' +questStr[i] + ':</label><input type='
+                        if questTypeStr[i]=="TF":
+                            form += '"checkbox" '
+                        elif questTypeStr[i]=="rate":
+                            form += '"number" placeholder="100"'
+                        else:
+                            form += '"text" '
+                        form += 'name="custom'
+                        form += str(i)
+                        form += '" class="form-control" '
+                        test = ''
+                        if questReqStr[i]=="true":
+                            form += 'required '
+                        form += '></div>'
 
             # form = len(questStr[2]) #len(questReqStr) + len(questTypeStr)
             temp_var = {'form':form, 'count':count, 'test':test}
             template = env.get_template('takeEval.html')
             self.response.write(template.render(temp_var))
         except:
-            # pass
+        #     # pass
             self.response.write("<html><head><title>404 Not Found</title></head><body><h1>404 Not Found</h1>The resource could not be found.<br /><br /></body></html>")
 
 
