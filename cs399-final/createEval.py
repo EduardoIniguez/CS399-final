@@ -2,32 +2,38 @@ import webapp2
 
 from jinja2 import Environment, FileSystemLoader
 env = Environment(loader=FileSystemLoader('templates'))
+from google.appengine.api import users
 
 from models import FormMod
 
 
 class CreateEvaluation(webapp2.RequestHandler):
     def get(self):
-        form ="<div class='form-group'><div class='col-sm-offset-2 col-sm-10'>" \
-              "<div class='checkbox' ><label class='control-label col-sm-2'>" \
-              "<input type='checkbox' checked name='nameInclude'>Member Name</label>" \
-              "<label class='control-label col-sm-3'><input type='checkbox' name='nameReq'>" \
-              "required?</label></div></div></div><div class='form-group'>" \
-              "<div class='col-sm-offset-2 col-sm-10'><div class='checkbox'><label class='control-label col-sm-2'>" \
-              "<input type='checkbox' checked name='scoreInclude'>Score </label><label class='control-label col-sm-3'>" \
-              "<input type='checkbox' name='scoreReq'>required?</label></div></div></div>" \
-              "<div class='form-group'><div class='col-sm-offset-2 col-sm-10'><div class='checkbox'>" \
-              "<label class='control-label col-sm-2'><input type='checkbox' checked name='workAgainInclude'>Work with again </label>" \
-              "<label class='control-label col-sm-3'><input type='checkbox' name='workAgainReq'>required?</label>" \
-              "</div></div></div><div class='form-group' ><div  class='col-sm-offset-2 col-sm-10'><div class='checkbox'>" \
-              "<label class='control-label col-sm-2'><input type='checkbox' checked name='commentInclude'>Comment </label>" \
-              "<label class='control-label col-sm-3'><input type='checkbox' name='commentReq'>required?</label></div></div></div>" \
-              "<input type='text' hidden='hidden' name='quest'><input hidden='hidden' type='text' name='questReq'><input hidden='hidden' type='text' name='questType'>"
+        user = users.get_current_user()
+        if user:
+            form ="<div class='form-group'><div class='col-sm-offset-2 col-sm-10'>" \
+                  "<div class='checkbox' ><label class='control-label col-sm-2'>" \
+                  "<input type='checkbox' checked name='nameInclude'>Member Name</label>" \
+                  "<label class='control-label col-sm-3'><input type='checkbox' name='nameReq'>" \
+                  "required?</label></div></div></div><div class='form-group'>" \
+                  "<div class='col-sm-offset-2 col-sm-10'><div class='checkbox'><label class='control-label col-sm-2'>" \
+                  "<input type='checkbox' checked name='scoreInclude'>Score </label><label class='control-label col-sm-3'>" \
+                  "<input type='checkbox' name='scoreReq'>required?</label></div></div></div>" \
+                  "<div class='form-group'><div class='col-sm-offset-2 col-sm-10'><div class='checkbox'>" \
+                  "<label class='control-label col-sm-2'><input type='checkbox' checked name='workAgainInclude'>Work with again </label>" \
+                  "<label class='control-label col-sm-3'><input type='checkbox' name='workAgainReq'>required?</label>" \
+                  "</div></div></div><div class='form-group' ><div  class='col-sm-offset-2 col-sm-10'><div class='checkbox'>" \
+                  "<label class='control-label col-sm-2'><input type='checkbox' checked name='commentInclude'>Comment </label>" \
+                  "<label class='control-label col-sm-3'><input type='checkbox' name='commentReq'>required?</label></div></div></div>" \
+                  "<input type='text' hidden='hidden' name='quest'><input hidden='hidden' type='text' name='questReq'><input hidden='hidden' type='text' name='questType'>"
 
-        # form =
-        temp_var = {'form':form}
-        template = env.get_template('createEval.html')
-        self.response.write(template.render(temp_var))
+            # form =
+            temp_var = {'form':form}
+            template = env.get_template('createEval.html')
+            self.response.write(template.render(temp_var))
+        else:
+            self.redirect(users.create_login_url('/'))
+
 
     def post(self):
         # form = ''
