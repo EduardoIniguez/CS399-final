@@ -17,13 +17,7 @@ class FormMod(ndb.Model):
 
 class PeerEvalMod(ndb.Model):
     name = ndb.StringProperty()
-    nameReq = ndb.BooleanProperty()
     score = ndb.IntegerProperty(default=100)
-    scoreReq = ndb.BooleanProperty()
-    workAgain = ndb.BooleanProperty()
-    workAgainReq = ndb.BooleanProperty()
+    workAgain = ndb.BooleanProperty(default=True)
     comment = ndb.StringProperty()
-    commentReq = ndb.BooleanProperty()
     quest = ndb.StringProperty()
-    questReq = ndb.StringProperty()
-    questType = ndb.StringProperty()

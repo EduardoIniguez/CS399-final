@@ -30,7 +30,7 @@ class CreateEvaluation(webapp2.RequestHandler):
         self.response.write(template.render(temp_var))
 
     def post(self):
-        form = ''
+        # form = ''
         form = FormMod()
         if self.request.get("nameInclude"):
             form.name = True
@@ -51,9 +51,12 @@ class CreateEvaluation(webapp2.RequestHandler):
         form.quest = self.request.get('quest')
         form.questReq = self.request.get('questReq')
         form.questType = self.request.get('questType')
-        form.put()
-        form = str(form)
-        temp_var = {'form':form }
-        template = env.get_template('createEval.html')
+        form =form.put()
+
+        form = "<a href='" + form.urlsafe() +"'>Please Share This Link</a>"
+        message = "Here is a link to your new evaluation"
+        temp_var = {'form':form, 'message':message }
+        template = env.get_template('success.html')
+
         self.response.write(template.render(temp_var))
 

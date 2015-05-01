@@ -22,6 +22,8 @@ from google.appengine.api import mail
 from google.appengine.api import users
 
 from createEval import CreateEvaluation
+from takeEval import TakeEvaluation
+
 from jinja2 import Environment, FileSystemLoader
 env = Environment(loader=FileSystemLoader('templates'))
 
@@ -107,5 +109,6 @@ app = webapp2.WSGIApplication([
     ('/contact.html', Contact),
     ('/about.html', About),
     ('/logout', Logout),
+    (r'/([a-zA-Z0-9-_]+)', TakeEvaluation),
 
 ], debug=True)
